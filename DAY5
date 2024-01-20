@@ -1,0 +1,56 @@
+--LINK 1
+SELECT DISTINCT CITY FROM STATION 
+WHERE ID % 2 = 0
+--LINK 2
+SELECT COUNT(CITY)- COUNT(DISTINCT CITY) FROM STATION
+--LINK 4
+SELECT ROUND(CAST(SUM(order_occurrences*item_count)/SUM(order_occurrences)
+AS DECIMAL),1) AS mean
+FROM items_per_order;
+--LINK 5
+SELECT DISTINCT candidate_id
+FROM candidates
+WHERE skill IN ('Python', 'Tableau', 'PostgreSQL') 
+GROUP BY(candidate_id)
+HAVING COUNT(skill) = 3
+ORDER BY candidate_id;
+--LINK 6
+SELECT user_id,
+DATE(MAX(post_date))-DATE(MIN(post_date)) AS days_between
+FROM posts
+WHERE post_date BETWEEN '01/01/2021' AND '01/01/2022'
+GROUP BY(user_id)
+HAVING COUNT(post_id) >= 2; 
+--LINK 7
+SELECT card_name, MAX(issued_amount)- MIN(issued_amount) AS difference
+FROM monthly_cards_issued
+GROUP BY card_name
+ORDER BY difference DESC;
+--LINK 8
+SELECT manufacturer, 
+ABS(SUM(total_sales-cogs)) AS total_loss,
+COUNT(drug) AS count_drug
+FROM pharmacy_sales
+WHERE total_sales < cogs
+GROUP BY (manufacturer)
+ORDER BY total_loss DESC
+--LINK 9 
+SELECT * FROM Cinema
+WHERE id%2 =1 and description != 'boring '
+ORDER BY rating DESC 
+--LINK 10 
+SELECT  teacher_id, COUNT( DISTINCT subject_id) AS cnt
+ FROM Teacher
+GROUP BY teacher_id;
+-- LINK 11
+# Write your MySQL query statement below
+SELECT user_id, COUNT(follower_id ) AS followers_count
+FROM Followers
+GROUP BY user_id
+ORDER BY  user_id
+--LINK 12
+SELECT class 
+
+FROM Courses 
+GROUP BY class
+HAVING COUNT(student) >=5 
